@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django Sentiment Analysis App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-dark bg-primary">
+          <a class="navbar-brand" href="#">Sentiment_Analyser</a>
+        </nav>
+      </div>
+    <form method="post" action="{% url 'analyze' %}">
+        {% csrf_token %}
+        <label for="text">Enter Text:</label><br>
+        <textarea name="text" id="text" rows="10" cols="80"></textarea><br><br>
+        <input type="submit" value="Analyze">
+    </form>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
