@@ -1,23 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sentiment Analysis Results</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Result</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style>
+        .content-box {
+            margin: 20px;
+        }
+        .final-sentiment {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .positive {
+            color: #4CAF50; /* Green color for positive */
+        }
+        .negative {
+            color: #F44336; /* Red color for negative */
+        }
+        .neutral {
+            color: #FFC107; /* Yellow color for neutral */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>Sentiment Analysis Results</h1>
-    <h2>Sentiment Scores:</h2>
-    <ul>
-        <li>Negative: {{ sentiment_scores.neg }}</li>
-        <li>Neutral: {{ sentiment_scores.neu }}</li>
-        <li>Positive: {{ sentiment_scores.pos }}</li>
-        <li>Compound: {{ sentiment_scores.compound }}</li>
-    </ul>
-    <h2>Emotion Distribution:</h2>
-    <ul>
-        {% for emotion, count in emotion_counts.items %}
-            <li>{{ emotion }}: {{ count }}</li>
-        {% endfor %}
-    </ul>
-    <img src="{{ chart_image }}" alt="Emotion Distribution Chart">
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Sentiment Analysis Result</h1>
+
+            <div class="content-box">
+                <h2 class="subtitle">Sentiment Scores</h2>
+                <ul>
+                    <li><strong>Positive:</strong> {{ sentiment_scores.pos }}</li>
+                    <li><strong>Neutral:</strong> {{ sentiment_scores.neu }}</li>
+                    <li><strong>Negative:</strong> {{ sentiment_scores.neg }}</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h2 class="subtitle">Final Sentiment</h2>
+                <p class="final-sentiment {% if overall_sentiment == 'Positive Sentiment' %}positive{% elif overall_sentiment == 'Negative Sentiment' %}negative{% else %}neutral{% endif %}">
+                    {{ overall_sentiment }}
+                </p>
+            </div>
+
+            <div class="content-box">
+                <h2 class="subtitle">Sentiment Analysis Graph</h2>
+                <img src="{{ graph_image }}" alt="Sentiment Analysis Graph">
+            </div>
+
+            <div class="content-box">
+                <a href="{% url 'analyze' %}" class="button is-primary">Analyze Another Text</a>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
